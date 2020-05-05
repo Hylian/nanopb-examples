@@ -3,7 +3,7 @@
 #include <string.h>
 #include "pb_common.h"
 #include "pb_encode.h"
-#include "basic.pb.h"
+#include "camera.pb.h"
 
 int main(void) {
   // Create the protobuf struct to encode
@@ -26,7 +26,7 @@ int main(void) {
   printf("Encode success!\n");
 
   // Test the encoded output against the protoc generated output
-  FILE *test_file = fopen("build/basic_test.bin", "rb");
+  FILE *test_file = fopen("build/camera_test.bin", "rb");
   if (!test_file) {
     printf("Unable to open test file!\n");
     return 1;

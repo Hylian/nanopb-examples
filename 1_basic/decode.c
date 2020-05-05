@@ -3,11 +3,11 @@
 #include <string.h>
 #include "pb_common.h"
 #include "pb_decode.h"
-#include "basic.pb.h"
+#include "camera.pb.h"
 
 int main(void) {
   // Read the encoded output from the protoc generated output
-  FILE *test_file = fopen("build/basic_test.bin", "rb");
+  FILE *test_file = fopen("build/camera_test.bin", "rb");
   if (!test_file) {
     printf("Unable to open test file!\n");
     return 1;

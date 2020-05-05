@@ -13,27 +13,27 @@ NANOPB_INC += -I ../nanopb/
 all: encode decode
 
 # Use the nanopb generator to generate code for our proto files
-$(OUTPUT_DIR)/basic.pb.c $(OUTPUT_DIR)/basic.pb.h:
+$(OUTPUT_DIR)/camera.pb.c $(OUTPUT_DIR)/camera.pb.h:
 	@mkdir -p $(@D)
-	python ../nanopb/generator/nanopb_generator.py -D $(OUTPUT_DIR) basic.proto 
+	python ../nanopb/generator/nanopb_generator.py -D $(OUTPUT_DIR) camera.proto 
 
 # Generate test binaries from text descriptions of a proto message
-$(OUTPUT_DIR)/basic_test.bin:
+$(OUTPUT_DIR)/camera_test.bin:
 	@mkdir -p $(@D)
-	protoc --encode=hylian.camera.Camera basic.proto < basic_test.txt > $(OUTPUT_DIR)/basic_test.bin
+	protoc --encode=hylian.camera.Camera camera.proto < camera_test.txt > $(OUTPUT_DIR)/camera_test.bin
 
-generate_test_file: $(OUTPUT_DIR)/basic_test.bin
+generate_test_file: $(OUTPUT_DIR)/camera_test.bin
 
 # Build and run encode test
-encode: $(OUTPUT_DIR)/basic.pb.c $(OUTPUT_DIR)/basic.pb.h generate_test_file
+encode: $(OUTPUT_DIR)/camera.pb.c $(OUTPUT_DIR)/camera.pb.h generate_test_file
 	@mkdir -p $(@D)
-	$(CC) -o $(OUTPUT_DIR)/encode encode.c $(OUTPUT_DIR)/basic.pb.c $(NANOPB_SRC) -I $(OUTPUT_DIR) $(NANOPB_INC)
+	$(CC) -o $(OUTPUT_DIR)/encode encode.c $(OUTPUT_DIR)/camera.pb.c $(NANOPB_SRC) -I $(OUTPUT_DIR) $(NANOPB_INC)
 	./$(OUTPUT_DIR)/encode
 
 # Build and run decode test
-decode: $(OUTPUT_DIR)/basic.pb.c $(OUTPUT_DIR)/basic.pb.h generate_test_file
+decode: $(OUTPUT_DIR)/camera.pb.c $(OUTPUT_DIR)/camera.pb.h generate_test_file
 	@mkdir -p $(@D)
-	$(CC) -o $(OUTPUT_DIR)/decode decode.c $(OUTPUT_DIR)/basic.pb.c $(NANOPB_SRC) -I $(OUTPUT_DIR) $(NANOPB_INC)
+	$(CC) -o $(OUTPUT_DIR)/decode decode.c $(OUTPUT_DIR)/camera.pb.c $(NANOPB_SRC) -I $(OUTPUT_DIR) $(NANOPB_INC)
 	./$(OUTPUT_DIR)/decode
 
 clean:
