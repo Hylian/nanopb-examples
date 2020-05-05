@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package hylian.camera;
+
+message Camera {
+  enum CameraType {
+    NONE = 0;
+    MIRRORLESS = 1;
+    DSLR = 2;
+    RANGEFINDER = 3;
+    SLR = 4;
+  }
+
+  string name = 1;
+  bool available = 2;
+  CameraType type = 3;
+}
